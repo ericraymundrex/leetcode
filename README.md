@@ -1,7 +1,9 @@
 ## Leetcode Solutions and DSA Notes
 
 ```
+{
 "Python Interpreter Version" : "Python 3.9.5"
+}
 ```
 
 
