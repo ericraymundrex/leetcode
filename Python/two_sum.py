@@ -3,7 +3,7 @@ from typing import List
 class Solution:
 
     # Brute Force solution
-    # --------------------------------------------------
+    # ----------------------------------------------------
     def twoSum_brute_force(self, nums: List[int], target: int) -> List[int]:
         length=len(nums)
         for x in range(length):
