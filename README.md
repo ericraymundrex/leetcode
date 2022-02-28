@@ -1,9 +1,9 @@
 ## Leetcode Solutions and DSA Notes 
 
-**Vim Notes : **
+**Vim Notes :**
 [Click Here](https://github.com/ericraymundrex/leetcode/tree/main/Vim)
 
-**Compilers and interpreters : **
+**Compilers and interpreters :**
 ```
 {
 "Python Interpreter Version" : "Python 3.9.5"
