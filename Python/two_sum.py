@@ -12,6 +12,17 @@ class Solution:
                     return [x,y]
         return []
 
+
+    def twoSum_hashTable(self, nums: List[int], target: int) -> List[int]:
+        hash_table={}
+        for index, num in enumerate(nums):
+            another=target-num
+            try:
+                hash_table[another]
+                return [hash_table[another],index]
+            except KeyError:
+                hash_table[num]=index
+
 if __name__ == '__main__':
     s = Solution()
-    print(s.twoSum_brute_force([3, 2, 4], 6))
+    print(s.twoSum_hashTable([3, 2, 4], 6))
