@@ -1,7 +1,7 @@
 ## Leetcode Solutions and DSA Notes
 
 ```
-"Python Version" : "Python 3.9.5"
+"Python Interpreter Version" : "Python 3.9.5"
 ```
 
 | Problem  | Solution  | Basic Idea  |
