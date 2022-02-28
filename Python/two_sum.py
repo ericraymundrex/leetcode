@@ -12,16 +12,34 @@ class Solution:
                     return [x,y]
         return []
 
+    # With Hash table
+    # ----------------------------------------------------
+    # Hash table formate
+    # num : index positions
 
+    def twoSum_hashTable_trycatch(self, nums: List[int], target: int) -> List[int]:
+        hash_table={}
+        nums:int
+        index:int
+        remaining:int
+        for index, num in enumerate(nums):
+            remaining=target-num;
+            try:
+                hash_table[remaining];
+                return [hash_table[remaining],index];
+            except KeyError:
+                hash_table[num]=index;
+    
     def twoSum_hashTable(self, nums: List[int], target: int) -> List[int]:
         hash_table={}
         for index, num in enumerate(nums):
-            another=target-num
-            try:
-                hash_table[another]
-                return [hash_table[another],index]
-            except KeyError:
-                hash_table[num]=index
+            remaining=target-num
+            if remaining in hash_table.keys():
+                return [hash_table[remaining],index]
+                
+            hash_table[num]=index
+        return []
+        
 
 if __name__ == '__main__':
     s = Solution()
