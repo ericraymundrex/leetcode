@@ -36,9 +36,20 @@ class Solution(object):
         return head
 
     def addTwoNumbers(self, l1:ListNode,l2:ListNode)->ListNode:
+        # ListNodes
+        dummy:ListNode
+        head:ListNode
+
+        #Integers
+        number1:int
+        number2:int
+        total:int
+        carry:int =0
+
+        
         dummy=ListNode();
         head=dummy;
-        carry=0;
+
         while l1 or l2 or carry:
             number1=l1.val if l1 else 0;
             number2=l2.val if l2 else 0;
