@@ -83,11 +83,13 @@ Applications <-> Doker Engine <-> Host OS
 doker verion
 ```
 in terminal, this will show need to run daemon service.
-
+<div align="center">
 <img src="./src/img1.png"/>
+</div>
+- But we dont need Desktop for Linux.
 
-- But we dont need Desktop for Linux. 
-
+### What is image:
+- Image is a read only bundle of a software, though which we can create the software.
 ### Docker hub and installing the images: 
 
 - Login to the service.
@@ -96,6 +98,73 @@ in terminal, this will show need to run daemon service.
 - For example if we want to install the node.js
 ```
 sudo docker run node
+(or)
+sudo pull node
 ```
-:point_up: **This will check the internally the node.js is installed if so it will take the local image only** else it will go to the docker hub and intall node.js.
+- :point_up: **This will check the internally the node.js is installed if so it will take the local image only** else it will go to the docker hub and intall node.js.
+- We only downloaded the bundle, We have not created the software.
+
+```
+sudo docker images
+```
+- :point_up: This will show all the images. :point_down: This shows
+
+|Repository|TAG    |IMAGES ID | CREATED     | SIZE |
+|----------|-------|----------|-------------|------|
+|node      |latest |36fad710..|21 hours ago |991MB |
+
+
+**Why the size is so big?**
+
+- This also have the light weight Linux operating system.
+
+### Creating the container:
+
+- **With one image we can create N- number of containers.**
+
+- Always we need the images to run the container.
+
+- Container will not take any memeory.
+
+- The OS and Node.js (in this case) is in the image file only.
+
+<div align="center">
+<img src="./src/img2.png" />
+
+</div>
+
+```
+sudo docker run node
+```
+
+- :point_up: This will **create a container**, When we run for one time it will create 1 container, when we run for 2nd time it will create a 2nd container.
+
+To see all the running containers
+```
+sudo docker ps
+```
+- :point_up: This will show all the running containers.
+- Here, we cant find node this is beacuse, node get run and exited.
+
+To see the exited container also:
+```
+sudo docker ps -a
+```
+- This will show all the exited containers also.
+
+|CONTAINER ID|IMAGE    |COMMAND   | CREATED     | STATUS |  PORTS  | NAMES              |
+|------------|---------|----------|-------------|--------|---------|--------------------|
+|<SHA 256 ID>|node     |          |4 mins       |EXITED  |         | priceless_varamitra|
+
+- When we created the container this will not take any memory.
+
+|CONTAINER ID| This is a SHA id which is given to every container    |
+|------------|-------------------------------------------------------|
+|NAMES       | User readable name which is unique for every container|
+
+To remove a container:
+
+```
+sudo docker rm <container_id or names>
+```
 
