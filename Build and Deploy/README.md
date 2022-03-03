@@ -173,6 +173,9 @@ To open the file in the interactive mode:
 ```
 sudo docker run -i -t node
 ```
+i -> Interactive
+
+t -> Terminal
 
 To stop the container
 ```
@@ -197,14 +200,14 @@ sudo docker build .
 
 - :point_up: This will buld our own image with respect to node.
 
-### Building node.js application.
+### Building node.js application and making the container.
 
 :point_down: This will create a MYAPP dir in the root directory. Note: Here "." - current app.
 
 ```
 # This is in the dockerfile
 
-FROM node
+FROM node:12.22
 
 WORKDIR /MYAPP
 
@@ -223,11 +226,20 @@ CMD["node","index.js"]
 Node JS Note: 
 - Here we don't have to install npm this comes with the node itself.
 - By default all ports are closed.
+- Here, the version is 12.22
 
 To run the code in port 3000 while starting, we have to map the port in docker machine to the host machine.
 
 ```
 sudo docker run -p 3000:3000 <container_name or container_SHA256>
+
+# What it means:
+
+sudo docker run -p <Host port>:<Docker port> <container_name or container_SHA256>
+
+# To run the code in port 4000, then
+
+sudo docker run -p 4000:3000 <container_name or container_SHA256>
 ```
 
 **Commands**
@@ -237,4 +249,36 @@ sudo docker run -p 3000:3000 <container_name or container_SHA256>
 |COPY <scr dir> <destination dir>|                                      |
 | RUN <what you wanna run>       |                                      |
 |CMD["node","index.js]           | CMD works when we start the container|
+
+**To give the name :**
+```
+sudo docker build -t <image_name>:<image_tag_name> .
+```
+
+We can also give the name for the python
+
+```
+sudo docker run -it --name mypythoncontainer1 mypython1:v1
+
+# This means
+
+sudo docker run -it --name <name_of_the_container> <image_name>:<image_tag_name>
+```
+
+**Attach mode and detach mode :**
+
+- When we run the above commands this will run in attach mode.
+- To run in background we can use detatch mode.
+- "-d" flag will run the code in detach mode.
+- "-a" flag will run the code in atach mode.
+```
+sudo docker run -d --name <name_of_the_container> <image_name>:<image_tag_name>
+```
+
+- We will use the attached mode to see the logs.
+
+### Logs genereated by the attached mode
+```
+docker logs <docker_name>
+```
 
