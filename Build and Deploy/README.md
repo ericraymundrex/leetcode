@@ -168,3 +168,73 @@ To remove a container:
 sudo docker rm <container_id or names>
 ```
 
+To open the file in the interactive mode:
+
+```
+sudo docker run -i -t node
+```
+
+To stop the container
+```
+docker stop <container_name or container_SHA256>
+```
+### Creating the images:
+
+- We can't create a empty image.
+- We can create a image with the base image.
+
+### Create a Dockerfile 
+
+- and paste the code 
+```
+FROM node
+```
+- In the terminal 
+
+```
+sudo docker build .
+```
+
+- :point_up: This will buld our own image with respect to node.
+
+### Building node.js application.
+
+:point_down: This will create a MYAPP dir in the root directory. Note: Here "." - current app.
+
+```
+# This is in the dockerfile
+
+FROM node
+
+WORKDIR /MYAPP
+
+COPY ./package.json .
+
+RUN npm install
+
+COPY index.js .
+
+EXPOSE 3000
+
+CMD["node","index.js"]
+```
+
+
+Node JS Note: 
+- Here we don't have to install npm this comes with the node itself.
+- By default all ports are closed.
+
+To run the code in port 3000 while starting, we have to map the port in docker machine to the host machine.
+
+```
+sudo docker run -p 3000:3000 <container_name or container_SHA256>
+```
+
+**Commands**
+
+| Command                        |                                      |
+|--------------------------------|--------------------------------------|
+|COPY <scr dir> <destination dir>|                                      |
+| RUN <what you wanna run>       |                                      |
+|CMD["node","index.js]           | CMD works when we start the container|
+
