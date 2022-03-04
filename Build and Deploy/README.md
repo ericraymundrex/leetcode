@@ -1,4 +1,4 @@
-### Build and Deploy 💻  👉 ☁️:
+### Build and Deploy 💻  👉 🐳 :point_right: :cloud: :
 
 **Problems 1:**
 - When we develop an application in any programming language, the deployment becomes difficult as we use different compilers.
@@ -168,6 +168,12 @@ To remove a container:
 sudo docker rm <container_id or names>
 ```
 
+To remove all the unknown images:
+```
+sudo docker images prune
+```
+:point_up: prune will remove all the unknown images, networks, and containers
+
 To open the file in the interactive mode:
 
 ```
@@ -246,14 +252,18 @@ sudo docker run -p 4000:3000 <container_name or container_SHA256>
 
 | Command                        |                                      |
 |--------------------------------|--------------------------------------|
-|COPY <scr dir> <destination dir>|                                      |
-| RUN <what you wanna run>       |                                      |
+|COPY {scr dir} {destination dir}|                                      |
+| RUN {what you wanna run}       |                                      |
 |CMD["node","index.js]           | CMD works when we start the container|
 
-**To give the name :**
+==**To give the name :** {IMPORTANT TO NOTE}==
 ```
 sudo docker build -t <image_name>:<image_tag_name> .
 ```
+
+**Trouble-shoot :**
+
+- When we have to name the image, the image should be in small letters.
 
 We can also give the name for the python
 
@@ -264,6 +274,10 @@ sudo docker run -it --name mypythoncontainer1 mypython1:v1
 
 sudo docker run -it --name <name_of_the_container> <image_name>:<image_tag_name>
 ```
+
+**Trouble-shoot :**
+
+- When the images is not found in the localhost; this means we missspelled the image name
 
 **Attach mode and detach mode :**
 
@@ -277,8 +291,38 @@ sudo docker run -d --name <name_of_the_container> <image_name>:<image_tag_name>
 
 - We will use the attached mode to see the logs.
 
-### Logs genereated by the attached mode
+**Logs genereated by the attached mode :**
 ```
 docker logs <docker_name>
 ```
 
+**Teminology :**
+
+Dockerfile :
+- Configuration which defines the expected destination configuration
+- Environment details
+- Source code or complied code.
+
+Image :
+- Compiled data from the configuration file as a source for each deployment.
+
+Container :
+- Final Box, Contianer where the program will actually run on ANY HOST.
+
+
+<div align="center">
+<img src="./src/img3.png"/>
+</div>
+
+### DockerHub
+
+NOTE: The name of the local and remote repository should be same.
+
+**To login to the dockerhub**
+```
+sudo docker login
+```
+**The name should include / from the remote repo**
+```
+sudo docker push <remote repo name>:<tag_name>
+```
