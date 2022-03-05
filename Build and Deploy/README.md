@@ -326,3 +326,14 @@ sudo docker login
 ```
 sudo docker push <remote repo name>:<tag_name>
 ```
+### Getting into the container:
+```
+sudo docker run -it --name <container_name> <image_name>:<image_tag> bash
+```
+
+This will open the terminal inside the container. all the changes which were made inside the container will not affect the image, If we gonna create a new container everything will be gone. This is because the image is read only (once the image is created its created).
+
+exit to get out of the container shell.
+```
+exit
+```

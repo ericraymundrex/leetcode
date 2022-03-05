@@ -1,7 +1,120 @@
+<div align ="center">
+<img src="./src/spongebob-database.gif" />
+</div>
+
 ### Basics:
 After installation, 
-In windows or linux there is only one database called postgres
-In Mac there will be 2 users postgres and name of your username.
+- In windows or linux there is only one database called postgres
+- In Mac there will be 2 users postgres and name of your username.
+
+**Things to be noted before writing the SQL query :**
+1. Weriting queries to retrive information
+2. Designing the schema or structure of the database.
+3. Understanding when to use advance features.
+4. Managing the databae in a production environment.
+
+### Database design :
+1. Ehat kind of data we need to store.
+2. What properties does this data should have
+3. What type of data does each of those propeties contains?
+
+Take **Cities table :**
+|name  | country | Population | Area |
+|------|---------|------------|------|
+|String|   String|         Int| Float|
+
+```
+CREATE TABLE CITIES(
+    ID SERIAL PRIMARY KEY,
+    NAME VARCHAR(20),
+    COUNTRY VARCHAR(20),
+    POPULATION INT,
+    AREA 
+)
+```
+### Filtering the records with WHERE :
+
+**ORDER in which the query get executes :**
+```
+# Executes third
+SELECT NAME , AREA
+
+# Executes 1st
+FROM cities
+
+#executes secons
+WHERE area > 4000;
+```
+
+Along with where we can also use IN:
+```
+SELECT CITY,COUNTRY
+FROM CITIES
+WHERE CITY NOT IN ('chennai','Shangai');
+```
+We can compund with math operator with **AND, OR, NOT**.
+
+**Using between :**
+
+```
+SELECT CITY, AREA
+FROM CITIES
+WHERE AREA BETWEEN 1000 AND 5000;
+```
+
+
+**Updating the rows**
+```
+UPDATE CITIES SET POPULATION = 400000
+WHERE CITY ='Tokyo';
+```
+
+**Deleting the rows**
+
+If we didn't mention WHERE then all the data will be deleted. 
+```
+UPDATE CITIES SET POPULATION = 400000
+WHERE CITY ='Tokyo';
+```
+### To Describe the cities:
+
+information_schema.columns have all the information about the columns about all the tables.
+<table border="2px">
+<tr>
+    <td>Postgres</td>
+    <td>MySQL</td>
+</tr>
+<tr>
+<td>
+    <code>
+    SELECT 
+    table_name, 
+    column_name, 
+    data_type 
+    FROM 
+    information_schema.columns
+    WHERE 
+   table_name = 'cities';
+    </code>
+</td>
+
+<td>
+    <code>
+    DESC cities;
+    </code>
+</td>
+<tr>
+</table>
+
+### Relationships:
+
+There are 3 types of relationships:
+
+1. one to one
+2. one to many
+3. many to many
+
+
 
 **PGAdmin 4 :** 
 
@@ -88,7 +201,9 @@ SELECT('01 3 2000 1:20 PM PST'::TIMESTAMP);
 - NOT NULL -> This will show error, when we make the column as the NULL.
 - DEFAULT  -> This will give the default value when we insert a row in the table.
 - UNIQUE   -> If we can't have two rows with same value.
+- CHECK    -> To check the data is logically correct.
 
+### Data structure design patterns:
 
 
 
