@@ -378,11 +378,43 @@ Different typed of data:
 
 There are three type of volums:
 1. **Anonymous Volume :**
+
     - This type of volumne removed as soon as the container removed.
     - This is used to store the temporary data.
+    - In the dockerfile : <code>VOLUME ["/app/assets"]</code>
+
 2. **Named Volume :**
+    - <code>docker run --name <container_name>  --rm -v assets:/app/assets -d -p 3000:3000 <Image_name>:<image_version></code>
+    - Named volume can't be created in dockerfile.
 
 3. **Bind Mounts :**
+    
+**Concept :**
+- The concept is- When there is a change in source folder it changes the symlink folder created in the container. But the reverse is not possible.
+```
+docker run --name <container_name> --rm
+    -v assets:/app/assets
+    -v ${pwd}:/app
+    -v /app/node_modules/
+    -d -p 3000:3000 <image_name>:<image_version>
+
+```
+
+- When there is longest path that volume will not be affected by the small path. 
+- This is used to not to create unnessary images.
+
+- Here we use -v flag. 
+
+1st Volume -> Is the named volume.
+
+2nd Volume -> Is the Bind Mount volume.
+
+3rd Vloume -> Anonymous volume.
+<div align="center">
+<img src="./src/img6.png"/>
+</div>
+
+---
 
 To show all the volums
 ```
