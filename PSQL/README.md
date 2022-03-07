@@ -253,3 +253,4 @@ CREATE ROLE testuser WITH PASSWORD 'secret_password';
 |  Command | What it do                  |
 |----------|-----------------------------|
 |  \dp     |  To list all the privileges |
+

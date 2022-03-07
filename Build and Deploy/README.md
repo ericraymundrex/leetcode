@@ -178,6 +178,9 @@ To open the file in the interactive mode:
 
 ```
 sudo docker run -i -t node
+
+
+sudo docker run --name fm --rm -d -p 3000:3000 filemanager:1.0
 ```
 i -> Interactive
 
@@ -336,4 +339,52 @@ This will open the terminal inside the container. all the changes which were mad
 exit to get out of the container shell.
 ```
 exit
+```
+
+#### <u>Docker Volumes</u>
+
+- Containers are built on the top of the container. In the container we can download the 'nano'. That is the reason we have to delete all the containers before Image.
+- All containers sit on the top of the Images.
+- Image is also a collection of layers inside the image.
+
+<div align="center">
+<img src="./src/img4.png"/>
+</div>
+
+We have to store the data in the container:
+
+Different typed of data:
+
+1. **Source code data** 
+    - This is typically stored in the image.
+
+2. **Temporary data**  
+    - Cache file, user uploaded images, assests.
+    - These are the data which we dont care even it is removed.
+
+3. **Permanent Storeage like Database Files**
+    - When the container get crashed then the data will be lost.
+    - Persistent storeage [Continously store the data in the HD and the HD should be consistent].
+
+**Solution :**
+
+**Volume :**
+- Volume is the external folder in the host machine. This is because the data stored in the volumne will not be deleted even when the container gets deleted.
+
+<div align="center">
+<img src="./src/img5.png"/>
+</div>
+
+
+There are three type of volums:
+1. **Anonymous Volume :**
+    - This type of volumne removed as soon as the container removed.
+    - This is used to store the temporary data.
+2. **Named Volume :**
+
+3. **Bind Mounts :**
+
+To show all the volums
+```
+sudo docker volume ls
 ```
