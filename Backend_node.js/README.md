@@ -1,4 +1,9 @@
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+
 #### <u>Web request</u>
+
 
 <div class="container">
 	<div class="row">
@@ -71,3 +76,53 @@
 	</div>
 </div>
 
+**Backend Development Framework :**
+1. Express
+2. Kova
+3. Sails
+
+**npm init**
+- This means we are initialising a project which is governed by the npm.
+
+**package.json script :**
+
+<code>"start":"nodemon index.js"</code>
+
+**Simple Route and deploy it in Heroku**
+```
+const express=require('express');
+
+const app=express()
+
+const PORT=process.env.PORT || 3000;
+
+app.get("/",(req,res)=>{
+    res.status(200).send("Hello");
+});
+app.get("/api/instagram/v1/:name",(req,res)=>{
+    inst_res={
+        name:"Eric",
+        followers: 2000,
+        following: 4000,
+        name:req.params.name
+    };
+
+    res.status(200).json(inst_res);
+})
+app.listen(PORT,()=>{
+    console.log(`Server is running at : ${PORT}\nReach http://localhost:${PORT}/`);
+});
+```
+
+- To deploy this we have to add the .gitignore and add node_modules/
+- Here, process.env.PORT should be before the 3000, this is because Heroku hide the environment variables for security reasons.
+```
+heroku git:clone -a testericrexx
+```
+To clone the repository.
+```
+git push heroku master
+```
+To push it to the server.
+
+#### <u>Swagger - Documentation</u>
