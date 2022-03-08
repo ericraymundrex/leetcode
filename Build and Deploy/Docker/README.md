@@ -524,3 +524,7 @@ EXPOSE 3000
 CMD ["npm","start"]
 ```
 
+#### <u>Docker compose :</u>
+- This is used to manage multiple containers
+- When we run the docker-compose then everything will come under one network. Docker-compose creates a network and puts all the containers in the same network.
+
