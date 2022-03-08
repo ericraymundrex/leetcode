@@ -298,7 +298,10 @@ sudo docker run -d --name <name_of_the_container> <image_name>:<image_tag_name>
 ```
 docker logs <docker_name>
 ```
-
+**To get into the container :**
+```
+docker exec -it <container_name> bash
+```
 **Teminology :**
 
 Dockerfile :
@@ -366,6 +369,17 @@ Different typed of data:
     - When the container get crashed then the data will be lost.
     - Persistent storeage [Continously store the data in the HD and the HD should be consistent].
 
+To show all the volums
+```
+sudo docker volume ls
+```
+
+To get the physical location
+```
+docker volume inspect <image_id>
+```
+
+
 **Solution :**
 
 **Volume :**
@@ -410,13 +424,103 @@ docker run --name <container_name> --rm
 2nd Volume -> Is the Bind Mount volume.
 
 3rd Vloume -> Anonymous volume.
+
 <div align="center">
 <img src="./src/img6.png"/>
 </div>
 
----
+**Here Bind Mounts :**
+- This affects the development environment also.
+- We don't want to affect the business environment.
 
-To show all the volums
+#### dockerignore file
 ```
-sudo docker volume ls
+.dockerignore
 ```
+
+- Here we can mention some of the files which we should ingore while copy.
+
+
+#### <u>Database and multiple container :</u>
+
+**Create a basic multi container system with mondoDB**
+
+```
+sudo docker run -p 27017:27017 --name mongod -d mongo
+```
+
+- While we are creating the container this does not mean both the container should be in the same host.
+- To resolve this we have to create the network.
+
+<div align="center">
+<img src="./src/img7.png"/>
+</div>
+
+
+**1st will do for single host :**
+1. Create a network
+```
+sudo docker network create mynetwork
+```
+
+<div align="center">
+<img src="./src/img8.png"/>
+</div>
+
+2. Create a mongoDB container with the network
+```
+sudo docker run -p 27017:27017 --name mongo --network mynetwork -d mongo
+```
+This will download the mongo from the dockerhub and run it.
+
+3. Create a node.js Container with the network
+
+```
+sudo docker run -p 3000:3000 --name node_container --network mynetwork nodeapp:1.0
+```
+Here, we can run the container with Bind mount.
+```
+sudo docker run -p 3000:3000 --name node_container --network mynetwork -v ${pwd}:/app nodeapp:1.0
+```
+
+Index.js
+```
+const express = require("express");
+const mongoose =require("mongoose");
+
+const app=express();
+
+app.get("/",(req,res)=>{
+    res.send("Welcome to the nodejs")
+})
+
+mongoose.connect(
+    "mongodb://mongo:27017/test_db",
+    {useNewUrlParser: true},
+    (err)=>{
+        if (err){
+            console.log("Error")
+            console.log(err)
+        }else{
+            console.log("Connection is good");
+            app.listen(3000)
+        }
+    }
+)
+```
+
+Dockerfile
+```
+FROM node
+
+WORKDIR /app
+
+COPY package.json .
+COPY index.js .
+
+RUN npm install
+
+EXPOSE 3000
+CMD ["npm","start"]
+```
+
