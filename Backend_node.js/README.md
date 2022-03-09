@@ -1,6 +1,7 @@
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 
 #### <u>Web request</u>
 
@@ -126,3 +127,28 @@ git push heroku master
 To push it to the server.
 
 #### <u>Swagger - Documentation</u>
+- When our application have a lot of features, and many front end and other developers look into the API, then haveing a amazing documentation is very useful.
+
+- In node.js application we use <code>swagger-ui-express</code> from npm.
+- We can store our documentation in ==YAML or JSON==. 
+```
+const swaggerUi = require('swagger-ui-express');
+const YAML=require('yamljs');
+
+const swaggerDocument = YAML.load('swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+```
+
+- For this we have to download <code>yamljs</code> along with swagger-ui-express.
+
+**FUN NOTE :**
+- When you edit the yaml file this will not refelect in the nodemon, even the nodemon is running.
+- To resolve this, create a **_nodemon.json_** file and add:
+```
+{
+	"ext" : ".js, .json, .yaml"
+}
+```
+- But default nodemon will only monitor the change in js, mjs file only.
+- To resolve this we have to add the extensions.
