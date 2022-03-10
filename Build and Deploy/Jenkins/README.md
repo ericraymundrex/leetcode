@@ -3,7 +3,9 @@
 </div>
 #### <u>Jenkins</u>
 
-- This is an automation software.
+- This is an automation software, to automate anything.
+- Now days it is useful mostly in Continous Development and integration.
+
 - Anyone can develop plugin for jenkins.
 
 **For Example :**
