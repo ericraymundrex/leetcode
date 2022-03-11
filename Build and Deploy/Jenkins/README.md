@@ -30,9 +30,12 @@ sudo docker run --rm --name myjenkins -d -v jenkins_home:/var/jenkins_home -p 80
 <img src="./src/img1.png"/>
 </div>
 
-- Create a basic Node app
-- Create a Repo in github
-- Pushed the sourc code in Github
-- Create jenkins container on cloud or local server.
-- Login to the jenkins control panel.
-- Go to the 
+**Jenkins basic setup :**
+1. Run the Jenkins in the container in the AWS cloud.
+2. **NOTE Troubleshoot in AWS Side :**
+    - In the security groups add a default SSH and a HTTP port.
+    - Don't forget to open the website with the ipaddress in HTTP request not HTTPs request.
+3. **After installing the Jenkins**
+    - See the **log** to get the 1st time access code.
+    - Install all the plugins.
+
